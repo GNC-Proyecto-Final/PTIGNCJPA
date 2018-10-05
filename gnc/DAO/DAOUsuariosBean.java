@@ -6,6 +6,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import entidades.Usuario;
+
 
 /**
  * Session Bean implementation class DAOUsuariosBean
@@ -37,5 +39,18 @@ public class DAOUsuariosBean {
 	    	existe = true;
 	    }
 	    return existe;
+    }
+    public Usuario obtenerUsuario(String user, String password) {
+    	Usuario usuario = null;
+     
+    	 Query query =  em.createNamedQuery("Usuario.usuarioLogin");
+    	 query.setParameter("usuario", user);
+    	 query.setParameter("contrasenia", password);
+
+    	 usuario =   (Usuario) query.getSingleResult();
+
+
+    		  return usuario;
+    	
     }
 }

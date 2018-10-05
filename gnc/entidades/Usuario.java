@@ -13,7 +13,8 @@ import java.util.List;
 @Table(name="USUARIOS")
 @NamedQueries({
 @NamedQuery(name="Usuario.findAll", query="SELECT u FROM Usuario u"),
-@NamedQuery(name="Usuario.usuarioValido", query="SELECT COUNT(u) FROM Usuario u WHERE u.usuario LIKE :usuario AND u.contrasenia LIKE :contrasenia")
+@NamedQuery(name="Usuario.usuarioValido", query="SELECT COUNT(u) FROM Usuario u WHERE u.usuario LIKE :usuario AND u.contrasenia LIKE :contrasenia"),
+@NamedQuery(name="Usuario.usuarioLogin", query="SELECT u FROM Usuario u WHERE u.usuario LIKE :usuario AND u.contrasenia LIKE :contrasenia")
 })
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
