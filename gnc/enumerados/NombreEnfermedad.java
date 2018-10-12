@@ -22,19 +22,5 @@ public enum NombreEnfermedad  {
 	   }
 	   throw new UnsupportedOperationException("El NombreEnfermedad " +nombre + " no es correcto" );
    }
-   /*
-   public static NombreEnfermedad getType(String nomEnf) {
-       if (nomEnf == null) {
-           return null;
-       }
-
-       for (NombreEnfermedad nombEnf : NombreEnfermedad.values()) {
-           if (nomEnf.equals(nombEnf.getNombre())) {
-               return nombEnf;
-           }
-       }
-       return null;
-   }
-   */
 
 }
