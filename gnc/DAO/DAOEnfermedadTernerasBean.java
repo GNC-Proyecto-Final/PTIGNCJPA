@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -105,15 +106,18 @@ public class DAOEnfermedadTernerasBean {
 	
 	public EnfermedadTernera obtenerTerneraEnfermaFecha(EnfermedadTernera enfermedadTernera) {
 		EnfermedadTernera enfTernera= null;
-   
-    	 Query query =  em.createNamedQuery("EnfermedadTernera.obtenerTerneraEnfermaFecha");
-    	 query.setParameter("idEnfermedad", enfermedadTernera.getId().getIdEnfermedad());
-    	 query.setParameter("idTernera", enfermedadTernera.getTernera().getIdTernera());
-    	 query.setParameter("fechaDesde", enfermedadTernera.getId().getFechaDesde());
-    	 
-    	 enfTernera =   (EnfermedadTernera) query.getSingleResult();
-
-	    return enfTernera;
+		try{
+	    	 Query query =  em.createNamedQuery("EnfermedadTernera.obtenerTerneraEnfermaFecha");
+	    	 query.setParameter("idEnfermedad", enfermedadTernera.getId().getIdEnfermedad());
+	    	 query.setParameter("idTernera", enfermedadTernera.getTernera().getIdTernera());
+	    	 query.setParameter("fechaDesde", enfermedadTernera.getId().getFechaDesde());
+	    	 
+	    	 enfTernera =   (EnfermedadTernera) query.getSingleResult();
+	
+		    return enfTernera;
+		 } catch (NoResultException e) {
+				return null;
+		}
     }
 
 }

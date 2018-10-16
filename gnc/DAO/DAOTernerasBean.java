@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import entidades.Ternera;
@@ -44,13 +45,16 @@ public class DAOTernerasBean {
     }
 	public Ternera obtenerTerneraId(long idTernera) {
 		Ternera ternera = null;
-        
-	   	Query query =  em.createNamedQuery("Ternera.obtenerTerneraId");
-	   	query.setParameter("idTernera", idTernera);
+		try {
+		   	Query query =  em.createNamedQuery("Ternera.obtenerTerneraId");
+		   	query.setParameter("idTernera", idTernera);
+		
+		   	ternera = (Ternera) query.getSingleResult();
 	
-	   	ternera = (Ternera) query.getSingleResult();
-
-	    return ternera;
+		    return ternera;
+		 } catch (NoResultException e) {
+ 			return null;
+		 }
 
 	}
    
