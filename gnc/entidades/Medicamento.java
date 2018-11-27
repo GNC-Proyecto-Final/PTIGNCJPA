@@ -2,6 +2,9 @@ package entidades;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Date;
 import java.util.List;
 
@@ -37,6 +40,7 @@ public class Medicamento implements Serializable {
 	private String nombre;
 
 	//bi-directional many-to-one association to ConsumoMedicamentoTernera
+	@JsonIgnore
 	@OneToMany(mappedBy="medicamento")
 	private List<ConsumoMedicamentoTernera> consumoMedicamentoTerneras;
 

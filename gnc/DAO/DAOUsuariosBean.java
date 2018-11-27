@@ -7,6 +7,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import entidades.Guachera;
 import entidades.Usuario;
 
 
@@ -48,10 +49,9 @@ public class DAOUsuariosBean {
 	    	 query.setParameter("usuario", user);
 	    	 query.setParameter("contrasenia", password);
 
-    	
-    	 
-    	 
-    		 usuario =   (Usuario) query.getSingleResult();
+	    	 usuario =   (Usuario) query.getSingleResult();
+	    	
+	    	//usuario.getGuacheras().size();
     		 return usuario;
     	 } catch (NoResultException e) {
     			return null;

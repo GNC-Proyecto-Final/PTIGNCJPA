@@ -2,6 +2,9 @@ package entidades;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -26,6 +29,7 @@ public class Madre implements Serializable {
 	private BigDecimal nroCaravana;
 
 	//bi-directional many-to-one association to Ternera
+	@JsonIgnore
 	@OneToMany(mappedBy="madre")
 	private List<Ternera> terneras;
 

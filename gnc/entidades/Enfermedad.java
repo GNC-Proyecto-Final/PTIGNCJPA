@@ -3,6 +3,8 @@ package entidades;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import enumerados.NombreEnfermedad;
 import enumerados.convert.NombreEnfermedadConvert;
 
@@ -39,6 +41,7 @@ public class Enfermedad implements Serializable {
 	
 	
 	//bi-directional many-to-one association to EnfermedadTernera
+	@JsonIgnore
 	@OneToMany(mappedBy="enfermedad")
 	private List<EnfermedadTernera> enfermedadTerneras;
 

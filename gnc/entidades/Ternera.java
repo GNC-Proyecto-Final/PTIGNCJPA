@@ -2,6 +2,9 @@ package entidades;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import enumerados.Raza;
 import enumerados.TipoParto;
 import enumerados.convert.RazaConvert;
@@ -69,14 +72,17 @@ public class Ternera implements Serializable {
 	private List<ConsumoAlimentoTernera> consumoAlimentoTerneras;
 
 	//bi-directional many-to-one association to ConsumoMedicamentoTernera
+	@JsonIgnore
 	@OneToMany(mappedBy="ternera")
 	private List<ConsumoMedicamentoTernera> consumoMedicamentoTerneras;
 
 	//bi-directional many-to-one association to EnfermedadTernera
+	@JsonIgnore
 	@OneToMany(mappedBy="ternera")
 	private List<EnfermedadTernera> enfermedadTerneras;
 
 	//bi-directional many-to-one association to Peso
+	@JsonIgnore
 	@OneToMany(mappedBy="ternera")
 	private List<Peso> pesos;
 

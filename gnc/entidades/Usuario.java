@@ -2,6 +2,9 @@ package entidades;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 
@@ -36,6 +39,8 @@ public class Usuario implements Serializable {
 	private String usuario;
 
 	//bi-directional many-to-one association to Guachera
+	//@JsonIgnore
+	@JsonIgnore
 	@OneToMany(mappedBy="usuario")
 	private List<Guachera> guacheras;
 
