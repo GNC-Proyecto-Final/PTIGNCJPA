@@ -8,5 +8,6 @@ import entidades.Ternera;
 public interface TernerasBeanRemote {
 	 List<Ternera> obtenerTodasTerneras();
 	 Ternera obtenerTerneraPorId(long idTernera);
+	 Ternera findTerneraPorId(long idTernera);
 	 Ternera obtenerTerneraNroCaravana(long idCaravana);
 }

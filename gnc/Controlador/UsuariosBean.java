@@ -4,6 +4,7 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import DAO.DAOUsuariosBean;
+import entidades.Usuario;
 
 /**
  * Session Bean implementation class UsuariosBean
@@ -28,4 +29,9 @@ public class UsuariosBean implements UsuariosBeanRemote {
 			return true;
     	
     }
+    
+    @Override
+    public Usuario obtenerUsuario(String user,String password){
+		return daoUsuariosBean.obtenerUsuario(user, password);
+	}
 }

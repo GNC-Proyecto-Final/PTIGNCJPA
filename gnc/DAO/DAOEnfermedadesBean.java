@@ -23,18 +23,29 @@ public class DAOEnfermedadesBean {
     public DAOEnfermedadesBean() {
         // TODO Auto-generated constructor stub
     }
+    /**
+     * Crear una nueva enfermedad
+     * @param enfermedad
+     */
     public void crearEnfermedad(Enfermedad enfermedad){
     	
     	em.persist(enfermedad);
     	em.flush();
     }
+    /**
+     * Elimina una enfermedad
+     * @param enfermedad
+     */
     public void eliminarEnfermedad(Enfermedad enfermedad){	
     	
    	 em.remove(em.merge(enfermedad));
      em.flush();
 
     }
-	
+	/***
+	 * Obtengo un listado de todas las enfermedades
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public List<Enfermedad> obtenerTodasEnfermedades(){
     	List<Enfermedad> enf = null;
@@ -42,6 +53,11 @@ public class DAOEnfermedadesBean {
 		 return enf;
 	}
 	
+	/**
+	 * Valida que exista la enfermedad
+	 * @param enfermedad
+	 * @return
+	 */
     public boolean existeEnfermedad( Enfermedad enfermedad) {
     	boolean existe = false;
     
@@ -59,6 +75,12 @@ public class DAOEnfermedadesBean {
 	    }
 	    return existe;
     }
+    
+    /**
+     * Para aplicacion Escritorio 2017
+     * @param idEnfermedad
+     * @return
+     */
     public Enfermedad obtenerEnfermedadId(long idEnfermedad) {
     	Enfermedad enfermedad = null;
      
@@ -68,6 +90,15 @@ public class DAOEnfermedadesBean {
     	 enfermedad =   (Enfermedad) query.getSingleResult();
 
 	    return enfermedad;
+    }
+    
+    /***
+     * Para Aplicacion Mobil y web
+     * @param idEnfermedad
+     * @return
+     */
+    public Enfermedad findEnfermedadId(Long idEnfermedad) {
+    	return em.find(Enfermedad.class, idEnfermedad);
     }
     
 }

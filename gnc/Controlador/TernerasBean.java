@@ -34,6 +34,11 @@ public class TernerasBean implements TernerasBeanRemote {
     public Ternera obtenerTerneraPorId(long idTernera){
 		return daoTernerasBean.obtenerTerneraId(idTernera);
 	}
+    
+    @Override
+    public Ternera findTerneraPorId(long idTernera){
+		return daoTernerasBean.obtenerTerneraId(idTernera);
+	}
     @Override
     public Ternera obtenerTerneraNroCaravana(long idCaravana){
 		return daoTernerasBean.obtenerTerneraNroCaravana(idCaravana);

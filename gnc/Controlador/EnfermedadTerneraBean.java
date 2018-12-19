@@ -90,9 +90,9 @@ public class EnfermedadTerneraBean implements EnfermedadTerneraBeanRemote {
 			return enfermTer;
 	    }
 	 @Override
-		public boolean existeEnfermedadEnTernaraEnfermedad(long idTernera){
+	public boolean existeEnfermedadEnTernaraEnfermedad(long idEnfermedad){
 			
-			boolean enferm = daoEnfermedadTerneraBean.obtenerTerneraEnfermaExiste(idTernera);
+			boolean enferm = daoEnfermedadTerneraBean.obtenerTerneraEnfermaExiste(idEnfermedad);
 			if(enferm == false)
 				return false;
 			else

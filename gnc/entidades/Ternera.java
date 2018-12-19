@@ -3,6 +3,7 @@ package entidades;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import enumerados.Raza;
@@ -43,14 +44,17 @@ public class Ternera implements Serializable {
 	@Column(name="CAUSA_MUERTE")
 	private String causaMuerte;
 
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="America/Montevideo") 
 	@Temporal(TemporalType.DATE)
 	@Column(name="FECHA_BAJA")
 	private Date fechaBaja;
-
+	
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="America/Montevideo") 
 	@Temporal(TemporalType.DATE)
 	@Column(name="FECHA_MUERTE")
 	private Date fechaMuerte;
-
+	
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="America/Montevideo") 
 	@Temporal(TemporalType.DATE)
 	@Column(name="FECHA_NACIMIENTO")
 	private Date fechaNacimiento;
@@ -68,6 +72,7 @@ public class Ternera implements Serializable {
 	private Raza raza;
 
 	//bi-directional many-to-one association to ConsumoAlimentoTernera
+	@JsonIgnore
 	@OneToMany(mappedBy="ternera")
 	private List<ConsumoAlimentoTernera> consumoAlimentoTerneras;
 

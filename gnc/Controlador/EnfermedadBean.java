@@ -56,9 +56,29 @@ public class EnfermedadBean implements EnfermedadBeanRemote {
 		}
     	return eliminado;
     }
+    public boolean eliminarEnfermedadPorId(long idEnfermedad) throws GNCException{
+    	boolean eliminado = false;
+    	try {
+    		
+    		Enfermedad enfermedad = daoEnfermedadBean.findEnfermedadId(idEnfermedad);
+    		if(!enfermedadTerneraBean.existeEnfermedadEnTernaraEnfermedad(enfermedad.getIdEnfermedad())){
+    			
+    			daoEnfermedadBean.eliminarEnfermedad(enfermedad);
+    			eliminado = true;
+    		}
+			
+		} catch (Exception e) {
+			throw new GNCException("Error al eliminar Enfermedad");
+		}
+    	return eliminado;
+    }
     @Override
     public Enfermedad obtenerEnfermedadPorId(long idEnfermedad){
 		return daoEnfermedadBean.obtenerEnfermedadId(idEnfermedad);
+	}
+    @Override
+    public Enfermedad findEnfermedadPorId(long idEnfermedad){
+		return daoEnfermedadBean.findEnfermedadId(idEnfermedad);
 	}
     @Override
 	public List<Enfermedad> obtenerTodasEnfermedades(){

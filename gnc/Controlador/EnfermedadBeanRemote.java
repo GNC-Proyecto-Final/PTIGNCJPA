@@ -11,7 +11,9 @@ import excepciones.GNCException;
 public interface EnfermedadBeanRemote {
 	boolean ingresarNuevaEnfermedad(Enfermedad enfermedad) throws GNCException ;
 	boolean eliminarEnfermedad(Enfermedad enfermedad) throws GNCException;
+	boolean eliminarEnfermedadPorId(long idEnfermedad) throws GNCException;
 	Enfermedad obtenerEnfermedadPorId(long idEnfermedad);
+	Enfermedad findEnfermedadPorId(long idEnfermedad);
 	List<Enfermedad> obtenerTodasEnfermedades();
 	boolean existeEnfermedad(Enfermedad enfermedad);
 }

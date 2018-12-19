@@ -3,6 +3,8 @@ package entidades;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Comparator;
 import java.util.Date;
 
@@ -26,7 +28,8 @@ public class EnfermedadTernera implements Serializable {
 
 	@EmbeddedId
 	private EnfermedadTerneraPK id;
-
+	
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="America/Montevideo") 
 	@Temporal(TemporalType.DATE)
 	@Column(name="FECHA_HASTA")
 	private Date fechaHasta;

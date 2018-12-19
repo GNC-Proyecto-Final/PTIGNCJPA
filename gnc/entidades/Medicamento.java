@@ -3,6 +3,7 @@ package entidades;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Date;
@@ -28,11 +29,13 @@ public class Medicamento implements Serializable {
 	private String costo;
 
 	private String dosis;
-
+	
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="America/Montevideo") 
 	@Temporal(TemporalType.DATE)
 	@Column(name="FECHA_DESDE")
 	private Date fechaDesde;
 
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="America/Montevideo") 
 	@Temporal(TemporalType.DATE)
 	@Column(name="FECHA_HASTA")
 	private Date fechaHasta;

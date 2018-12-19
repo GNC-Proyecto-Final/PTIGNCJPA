@@ -58,4 +58,13 @@ public class DAOTernerasBean {
 
 	}
    
+	
+    /***
+     * Para Aplicacion Mobil y web
+     * @param idEnfermedad
+     * @return
+     */
+    public Ternera findTerneraId(Long idTernera) {
+    	return em.find(Ternera.class, idTernera);
+    }
 }

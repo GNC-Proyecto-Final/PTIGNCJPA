@@ -3,6 +3,7 @@ package entidades;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
  * The primary key class for the ENFERMEDAD_TERNERA database table.
@@ -19,6 +20,8 @@ public class EnfermedadTerneraPK implements Serializable {
 	@Column(name="ID_ENFERMEDAD")
 	private long idEnfermedad;
 
+	 
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="America/Montevideo") 
 	@Temporal(TemporalType.DATE)
 	@Column(name="FECHA_DESDE")
 	private Date fechaDesde;

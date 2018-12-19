@@ -12,6 +12,7 @@ public interface EnfermedadTerneraBeanRemote {
 	List<EnfermedadTernera> obtenerTodasEnfermedadesTerneras();
 	public List<EnfermedadTernera> obtenerInformeTodasEnfermedadesTerneras();
 	boolean obtenerTerneraEnfermaFechaExiste(EnfermedadTernera enfermedadTernera);
-	boolean existeEnfermedadEnTernaraEnfermedad(long idTernera);
+	boolean existeEnfermedadEnTernaraEnfermedad(long idEnfermedad);
 	EnfermedadTernera obtenerTerneraEnfermaFecha(EnfermedadTernera enfermedadTernera);
+	
 }
