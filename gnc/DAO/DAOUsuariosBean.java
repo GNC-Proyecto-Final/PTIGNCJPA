@@ -5,8 +5,11 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import entidades.Usuario;
+import excepciones.TerneraEnfermaException;
+import excepciones.UsuarioException;
 
 
 /**
@@ -23,7 +26,7 @@ public class DAOUsuariosBean {
     public DAOUsuariosBean() {
         // TODO Auto-generated constructor stub
     }
-    public boolean usuarioValido(String user, String password){
+    public boolean usuarioValido(String user, String password) throws UsuarioException{
     	boolean existe = false;
     
     	 int cont = 0;
@@ -33,10 +36,14 @@ public class DAOUsuariosBean {
     	 query.setParameter("contrasenia", password);
 
     	 cont =   ((Number)query.getSingleResult()).intValue();
-    	 
-    	 if(cont > 0){
-	    	
-	    	existe = true;
+    	 try {
+    		 
+	    	 if(cont > 0){
+		    	
+		    	existe = true;
+		    }
+		}catch(PersistenceException e){
+	    	throw new UsuarioException("Ha ocurrido un error al obtener el usuario");
 	    }
 	    return existe;
     }

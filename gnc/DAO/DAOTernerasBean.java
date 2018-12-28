@@ -7,8 +7,11 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import entidades.Ternera;
+import excepciones.EnfermedadException;
+import excepciones.TerneraException;
 
 
 /**
@@ -26,22 +29,36 @@ public class DAOTernerasBean {
         // TODO Auto-generated constructor stub
     }
     @SuppressWarnings("unchecked")
-	public List<Ternera> obtenerTodasTerneras(){
+	public List<Ternera> obtenerTodasTerneras() throws TerneraException{
     	List<Ternera> enf = null;
-    	enf =   em.createNamedQuery("Ternera.obtenerTodasTerneras").getResultList();
-		 return enf;
+    	try {
+	    	
+	    	enf =   em.createNamedQuery("Ternera.obtenerTodasTerneras").getResultList();
+			 return enf;
+	    }
+		catch(PersistenceException e){
+			
+	    	throw new TerneraException("Ha ocurrido un error al obtener las terneras");
+	    } 
 	}
     
 
-    public Ternera obtenerTerneraNroCaravana(long nroCaravana) {
+    public Ternera obtenerTerneraNroCaravana(long nroCaravana) throws TerneraException {
     	Ternera tenera = null;
-     
-    	 Query query =  em.createNamedQuery("Ternera.obtenerTerneraNroCaravana");
-    	 query.setParameter("nroCaravana", nroCaravana);
-
-    	 tenera =   (Ternera) query.getSingleResult();
-
-	    return tenera;
+    	try {
+	    	
+	     
+	    	 Query query =  em.createNamedQuery("Ternera.obtenerTerneraNroCaravana");
+	    	 query.setParameter("nroCaravana", nroCaravana);
+	
+	    	 tenera =   (Ternera) query.getSingleResult();
+	
+		    return tenera;
+	    }
+		catch(PersistenceException e){
+			
+	    	throw new TerneraException("Ha ocurrido un error al obtener las terneras");
+	    } 
     }
 	public Ternera obtenerTerneraId(long idTernera) {
 		Ternera ternera = null;

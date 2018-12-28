@@ -5,8 +5,11 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import entidades.Enfermedad;
+import excepciones.EnfermedadException;
+import excepciones.TerneraEnfermaException;
 
 
 /**
@@ -26,39 +29,59 @@ public class DAOEnfermedadesBean {
     /**
      * Crear una nueva enfermedad
      * @param enfermedad
+     * @throws EnfermedadException 
      */
-    public void crearEnfermedad(Enfermedad enfermedad){
-    	
-    	em.persist(enfermedad);
-    	em.flush();
+    public void crearEnfermedad(Enfermedad enfermedad) throws EnfermedadException{
+    	try {
+	    	em.persist(enfermedad);
+	    	em.flush();
+    	}
+		catch(PersistenceException e){
+			
+	    	throw new EnfermedadException("Ha ocurrido un error al obtener la enfermedad");
+	    } 
     }
     /**
      * Elimina una enfermedad
      * @param enfermedad
+     * @throws TerneraEnfermaException 
      */
-    public void eliminarEnfermedad(Enfermedad enfermedad){	
-    	
-   	 em.remove(em.merge(enfermedad));
-     em.flush();
+    public void eliminarEnfermedad(Enfermedad enfermedad) throws TerneraEnfermaException{	
+    	try {
+		   	 em.remove(em.merge(enfermedad));
+		     em.flush();
+    	}
+		catch(PersistenceException e){
+			
+	    	throw new TerneraEnfermaException("Ha ocurrido un error al Eliminar la enfermedad");
+	    } 
 
     }
 	/***
 	 * Obtengo un listado de todas las enfermedades
 	 * @return
+	 * @throws TerneraEnfermaException 
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Enfermedad> obtenerTodasEnfermedades(){
-    	List<Enfermedad> enf = null;
-    	enf =   em.createNamedQuery("Enfermedad.findAllEnfermedades").getResultList();
-		 return enf;
+	public List<Enfermedad> obtenerTodasEnfermedades() throws TerneraEnfermaException{
+		try {
+			List<Enfermedad> enf = null;
+	    	enf =   em.createNamedQuery("Enfermedad.findAllEnfermedades").getResultList();
+			return enf;
+		}catch(PersistenceException e){
+			
+	    	throw new TerneraEnfermaException("Ha ocurrido un error al obtener la enfermedades");
+	    } 
+
 	}
 	
 	/**
 	 * Valida que exista la enfermedad
 	 * @param enfermedad
 	 * @return
+	 * @throws TerneraEnfermaException 
 	 */
-    public boolean existeEnfermedad( Enfermedad enfermedad) {
+    public boolean existeEnfermedad( Enfermedad enfermedad) throws TerneraEnfermaException {
     	boolean existe = false;
     
     	 int cont = 0;
@@ -68,11 +91,16 @@ public class DAOEnfermedadesBean {
     	 query.setParameter("gradoGravedad", enfermedad.getGradoGravedad());
 
     	 cont =   ((Number)query.getSingleResult()).intValue();
-    	 
-    	 if(cont > 0){
-	    	
-	    	existe = true;
-	    }
+    	 try {
+	    	 if(cont > 0){
+		    	
+		    	existe = true;
+		    }
+    	 }
+    	 catch(PersistenceException e){
+ 			
+ 	    	throw new TerneraEnfermaException("Ha ocurrido un error al obtener existe enfermedad");
+ 	    } 
 	    return existe;
     }
     
@@ -80,14 +108,22 @@ public class DAOEnfermedadesBean {
      * Para aplicacion Escritorio 2017
      * @param idEnfermedad
      * @return
+     * @throws TerneraEnfermaException 
      */
-    public Enfermedad obtenerEnfermedadId(long idEnfermedad) {
+    public Enfermedad obtenerEnfermedadId(long idEnfermedad) throws TerneraEnfermaException {
     	Enfermedad enfermedad = null;
      
     	 Query query =  em.createNamedQuery("Enfermedad.obtenerEnfermedadId");
     	 query.setParameter("idEnfermedad", idEnfermedad);
-
-    	 enfermedad =   (Enfermedad) query.getSingleResult();
+    	 
+    	 try {
+    		 enfermedad =   (Enfermedad) query.getSingleResult();
+    	 }    	  
+    	 catch(PersistenceException e){
+ 			
+ 	    	throw new TerneraEnfermaException("Ha ocurrido un error al obtener la enfermedades");
+ 	    } 
+    	 
 
 	    return enfermedad;
     }
@@ -96,9 +132,18 @@ public class DAOEnfermedadesBean {
      * Para Aplicacion Mobil y web
      * @param idEnfermedad
      * @return
+     * @throws TerneraEnfermaException 
      */
-    public Enfermedad findEnfermedadId(Long idEnfermedad) {
-    	return em.find(Enfermedad.class, idEnfermedad);
+    public Enfermedad findEnfermedadId(Long idEnfermedad) throws TerneraEnfermaException {
+    	try {
+    		return em.find(Enfermedad.class, idEnfermedad);
+    	}
+    	catch(PersistenceException e){
+  			
+  	    	throw new TerneraEnfermaException("Ha ocurrido un error al obtener la enfermedades");
+  	    } 
+    	
     }
+    
     
 }

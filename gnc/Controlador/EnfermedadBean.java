@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import DAO.DAOEnfermedadesBean;
 import entidades.Enfermedad;
 import excepciones.GNCException;
+import excepciones.TerneraEnfermaException;
 
 
 
@@ -73,22 +74,22 @@ public class EnfermedadBean implements EnfermedadBeanRemote {
     	return eliminado;
     }
     @Override
-    public Enfermedad obtenerEnfermedadPorId(long idEnfermedad){
+    public Enfermedad obtenerEnfermedadPorId(long idEnfermedad) throws TerneraEnfermaException{
 		return daoEnfermedadBean.obtenerEnfermedadId(idEnfermedad);
 	}
     @Override
-    public Enfermedad findEnfermedadPorId(long idEnfermedad){
+    public Enfermedad findEnfermedadPorId(long idEnfermedad) throws TerneraEnfermaException{
 		return daoEnfermedadBean.findEnfermedadId(idEnfermedad);
 	}
     @Override
-	public List<Enfermedad> obtenerTodasEnfermedades(){
+	public List<Enfermedad> obtenerTodasEnfermedades() throws TerneraEnfermaException{
     	List<Enfermedad> enf= null;
     	
     	enf = (List<Enfermedad>) daoEnfermedadBean.obtenerTodasEnfermedades();
     	return enf;
 	}
     @Override
-    public boolean existeEnfermedad(Enfermedad enfermedad){
+    public boolean existeEnfermedad(Enfermedad enfermedad) throws TerneraEnfermaException{
     	boolean enferm = daoEnfermedadBean.existeEnfermedad(enfermedad);
 		if(enferm == false)
 			return false;

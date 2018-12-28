@@ -3,8 +3,11 @@ package Controlador;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.persistence.NoResultException;
+
 import DAO.DAOUsuariosBean;
 import entidades.Usuario;
+import excepciones.UsuarioException;
 
 /**
  * Session Bean implementation class UsuariosBean
@@ -21,13 +24,16 @@ public class UsuariosBean implements UsuariosBeanRemote {
         // TODO Auto-generated constructor stub
     }
     @Override
-    public boolean validarUsuario(String user, String password){
-    	boolean usuario = daoUsuariosBean.usuarioValido(user, password);
-		if(usuario == false)
+    public boolean validarUsuario(String user, String password) throws UsuarioException{
+    	boolean usuario;
+		
+			usuario = daoUsuariosBean.usuarioValido(user, password);
+			if(usuario == false)
 			return false;
 		else
 			return true;
-    	
+		
+   	
     }
     
     @Override

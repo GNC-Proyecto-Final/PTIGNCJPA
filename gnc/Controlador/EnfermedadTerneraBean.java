@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 import DAO.DAOEnfermedadTernerasBean;
 import entidades.EnfermedadTernera;
 import excepciones.GNCException;
+import excepciones.TerneraEnfermaException;
 
 
 
@@ -58,7 +59,7 @@ public class EnfermedadTerneraBean implements EnfermedadTerneraBeanRemote {
     	return creado;
     }
     @Override
-	public List<EnfermedadTernera> obtenerTodasEnfermedadesTerneras(){
+	public List<EnfermedadTernera> obtenerTodasEnfermedadesTerneras() throws TerneraEnfermaException{
     	List<EnfermedadTernera> enf= null;
     	
     	enf = (List<EnfermedadTernera>) daoEnfermedadTerneraBean.obtenerTodasEnfermedadesTerneras();
@@ -66,7 +67,7 @@ public class EnfermedadTerneraBean implements EnfermedadTerneraBeanRemote {
 	}
 	
     @Override
-	public List<EnfermedadTernera> obtenerInformeTodasEnfermedadesTerneras(){
+	public List<EnfermedadTernera> obtenerInformeTodasEnfermedadesTerneras() throws TerneraEnfermaException{
     	List<EnfermedadTernera> enf= null;
     	
     	enf = (List<EnfermedadTernera>) daoEnfermedadTerneraBean.obtenerTodasEnfermedadesTerneras();
@@ -76,7 +77,7 @@ public class EnfermedadTerneraBean implements EnfermedadTerneraBeanRemote {
 	}
     
 	 @Override
-	 public boolean obtenerTerneraEnfermaFechaExiste(EnfermedadTernera enfermedadTernera){
+	 public boolean obtenerTerneraEnfermaFechaExiste(EnfermedadTernera enfermedadTernera) throws TerneraEnfermaException{
     	boolean enfermTer = daoEnfermedadTerneraBean.obtenerTerneraEnfermaFechaExiste(enfermedadTernera);
 		if(enfermTer == false)
 			return false;
@@ -84,13 +85,13 @@ public class EnfermedadTerneraBean implements EnfermedadTerneraBeanRemote {
 			return true;
     }
 	 @Override
-	 public EnfermedadTernera obtenerTerneraEnfermaFecha(EnfermedadTernera enfermedadTernera){
+	 public EnfermedadTernera obtenerTerneraEnfermaFecha(EnfermedadTernera enfermedadTernera) throws TerneraEnfermaException{
 		 EnfermedadTernera enfermTer;
 		 	enfermTer = daoEnfermedadTerneraBean.obtenerTerneraEnfermaFecha(enfermedadTernera);
 			return enfermTer;
 	    }
 	 @Override
-	public boolean existeEnfermedadEnTernaraEnfermedad(long idEnfermedad){
+	public boolean existeEnfermedadEnTernaraEnfermedad(long idEnfermedad) throws TerneraEnfermaException{
 			
 			boolean enferm = daoEnfermedadTerneraBean.obtenerTerneraEnfermaExiste(idEnfermedad);
 			if(enferm == false)

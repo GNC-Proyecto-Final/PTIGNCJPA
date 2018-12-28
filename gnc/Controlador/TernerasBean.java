@@ -7,6 +7,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import DAO.DAOTernerasBean;
 import entidades.Ternera;
+import excepciones.TerneraException;
 
 
 /**
@@ -24,7 +25,7 @@ public class TernerasBean implements TernerasBeanRemote {
         // TODO Auto-generated constructor stub
     }
     @Override
-	public List<Ternera> obtenerTodasTerneras(){
+	public List<Ternera> obtenerTodasTerneras() throws TerneraException{
     	List<Ternera> enf= null;
     	
     	enf = (List<Ternera>) daoTernerasBean.obtenerTodasTerneras();
@@ -40,7 +41,7 @@ public class TernerasBean implements TernerasBeanRemote {
 		return daoTernerasBean.obtenerTerneraId(idTernera);
 	}
     @Override
-    public Ternera obtenerTerneraNroCaravana(long idCaravana){
+    public Ternera obtenerTerneraNroCaravana(long idCaravana) throws TerneraException{
 		return daoTernerasBean.obtenerTerneraNroCaravana(idCaravana);
 	}
 }
